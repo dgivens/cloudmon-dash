@@ -8,16 +8,19 @@
     {%- endblock %}
   </head>
   <body>
-    <div class="navbar navbar-inverse">
-      <div class="navbar-inner">
-        <a class="brand" href="#">Heat Monitoring</a>
-        {% block navlist %}{% endblock %}
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Cloud Monitoring Dashboard</a>
+          {% block navlist %}{% endblock %}
+        </div>
       </div>
-    </div>
+    </nav>
     {%- block content %}{% endblock %}
     {%- block footer %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/heatdash.js"></script>
     {%- endblock %}
   </body>
 </html>
