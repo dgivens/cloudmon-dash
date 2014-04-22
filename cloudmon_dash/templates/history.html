@@ -1,0 +1,63 @@
+{%- extends "base.html" %}
+{%- block navlist %}
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/hosts">Hosts</a></li>
+        </ul>
+{%- endblock navlist %}
+{%- block content %}
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <h4>Host history - {{ hostname }}</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>State</th>
+                <th>Host</th>
+                <th>Check</th>
+                <th>Alarm</th>
+                <th>Status</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody class="table-striped">
+            {% for event in events -%}
+              <tr>
+                {% if event['details']['state'] == 'OK' -%}
+                <td><span class="label label-success">OK</span></td>
+                {% elif event['details']['state'] == 'WARNING' -%}
+                <td><span class="label label-warning">WARNING</span></td>
+                {% else -%}
+                <td><span class="label label-danger">CRITICAL</span></td>
+                {% endif -%}
+                <td>{{ event['entity']['label'] }}</td>
+                <td>{{ event['check']['label'] }}</td>
+                <td>{{ event['alarm']['label'] }}</td>
+                <td>{{ event['details']['status'] }}</td>
+                <td>{{ event['details']['timestamp'] }}</td>
+              </tr>
+            {% endfor -%}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+          <ul class="pager">
+            {% if page == 1 -%}
+            <li class="disabled">&larr; Previous</li>
+            {% else -%}
+            <li><a href="/history/{{ hostname }}?page={{ page - 1 }}">&larr; Previous</a></li>
+            {% endif -%}
+            {% if page == total_pages -%}
+            <li class="disabled">Next &rarr;</li>
+            {% else -%}
+            <li><a href="/history/{{ hostname }}?page={{ page + 1 }}">Next &rarr;</a></li>
+            {% endif -%}
+          </ul>
+      </div>
+{%- endblock content %}

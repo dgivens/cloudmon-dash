@@ -1,4 +1,0 @@
-Hostname: {{ alert['hostname'] }}
-{{ alert['check'] }} {{ alert['alarm'] }} {{ alert['state'] }}
-Status: {{ alert['status'] }}
-Timestamp: {{ alert['timestamp'] }}

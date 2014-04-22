@@ -1,0 +1,4 @@
+Hostname: {{ alarm['hostname'] }}
+{{ alarm['check'] }} {{ alarm['alarm'] }} {{ alarm['state'] }}
+Status: {{ alarm['status'] }}
+Timestamp: {{ alarm['timestamp'] }}
