@@ -5,3 +5,5 @@ app = Flask(__name__)
 app.config.from_pyfile('../dash.cfg')
 
 mongo = PyMongo(app)
+
+import cloudmon_dash.views
