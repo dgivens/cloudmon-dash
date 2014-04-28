@@ -58,7 +58,8 @@ def status_all():
     alarms = []
     for alarm in mongo.db.alarms.find():
         alarms.append(alarm)
-    return json.dumps(alarms, default=json_util.default)
+    alarms_dict = {'alarms': alarms}
+    return json.dumps(alarms_dict, default=json_util.default)
 
 
 @app.route('/events')
@@ -66,7 +67,8 @@ def events():
     skip = request.args.get('skip') if request.args.get('skip') else 0
     limit = request.args.get('limit') if request.args.get('limit') else 10
     events = get_events(skip, limit)
-    return json.dumps(events, default=json_util.default)
+    events_dict = {'events': events}
+    return json.dumps(events_dict, default=json_util.default)
 
 
 @app.route('/alarms/<alarm_id>/acknowledge')
