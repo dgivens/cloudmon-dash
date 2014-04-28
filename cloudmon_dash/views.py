@@ -63,8 +63,8 @@ def status_all():
 
 @app.route('/events')
 def events():
-    skip = request.args.get('skip')
-    limit = request.args.get('limit')
+    skip = request.args.get('skip') if request.args.get('skip') else 0
+    limit = request.args.get('limit') if request.args.get('limit') else 10
     events = get_events(skip, limit)
     return json.dumps(events, default=json_util.default)
 
