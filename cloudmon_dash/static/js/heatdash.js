@@ -30,7 +30,7 @@ $( document ).ready( function()
         {
           var row = "<tr id='" + element._id['$oid'] + "'>";
           row += "<td><span class='label label-" + element.state_label + "'>" + element.state + "</span></td>";
-          row += "<td>" + element.hostname + "</td>";
+          row += "<td><a href='/history/" + element.hostname + "'>" + element.hostname + "</a></td>";
           row += "<td>" + element.check + "</td>";
           row += "<td>" + element.alarm + "</td>";
           row += "<td>" + element.status + "</td>";
@@ -55,7 +55,7 @@ $( document ).ready( function()
       {
         var row = "<tr>";
         row += "<td><span class='label label-" + element.details.state_label + "'>" + element.details.state + "</span></td>";
-        row += "<td>" + element.entity.label + "</td>";
+        row += "<td><a href='/history/" + element.entity.label + "'>" + element.entity.label + "</a></td>";
         row += "<td>" + element.check.label + "</td>";
         row += "<td>" + element.alarm.label + "</td>";
         row += "<td>" + element.details.status + "</td>";
