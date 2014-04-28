@@ -52,6 +52,14 @@ def alarms():
     return json.dumps(alerting, default=json_util.default)
 
 
+@app.route('/status_all')
+def status_all():
+    alarms = []
+    for alarm in mongo.db.alarms.find():
+        alarms.append(alarm)
+    return json.dumps(alarms, default=json_util.default)
+
+
 @app.route('/alarms/<alarm_id>/acknowledge')
 def acknowledge(alarm_id):
     oid = ObjectId(alarm_id)
