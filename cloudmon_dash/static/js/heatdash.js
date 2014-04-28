@@ -50,7 +50,7 @@ $( document ).ready( function()
     });
     $.getJSON( '/events', function( data )
     {
-      var table="";
+      var table=[];
       $.each( data['events'], function( index, element )
       {
         var row = "<tr>";
