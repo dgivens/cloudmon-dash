@@ -63,7 +63,7 @@ $( document ).ready( function()
         row += "</tr>";
         table.push(row)
       });
-      $( "#events > tbody").replaceWith( table.join("\n") );
+      $( "#events > tbody").html( table.join("\n") );
     });
   }, 10000)
 });
