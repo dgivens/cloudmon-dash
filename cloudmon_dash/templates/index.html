@@ -44,6 +44,39 @@
           </table>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-md-5 col-md-offset=1">
+          <h4>Recent Events</h4>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <table id="events" class="table table-striped">
+            <thead>
+              <tr>
+                <th>State</th>
+                <th>Host</th>
+                <th>Check</th>
+                <th>Alarm</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+            </thead>
+            <tbody class="table-striped">
+            {%- for event in events %}
+              <tr>
+                <td><span class="label label-{{ event['details']['state_label'] }}">{{ event['details']['state'] }}</span></td>
+                <td>{{ event['entity']['label'] }}</td>
+                <td>{{ event['check']['label'] }}</td>
+                <td>{{ event['alarm']['label'] }}</td>
+                <td>{{ event['details']['status'] }}</td>
+                <td>{{ event['details']['timestamp'] }}</td>
+              </tr>
+            {%- endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
 {%- endblock content %}
 {%- block footer %}
     {{ super() }}

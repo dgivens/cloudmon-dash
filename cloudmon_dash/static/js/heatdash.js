@@ -47,6 +47,22 @@ $( document ).ready( function()
         }
       });
       $( "#alarms > tbody" ).prepend( items.join("\n") );
-    })
+    });
+    $.getJSON( '/events', function( data )
+    {
+      var table="";
+      $.each( data['events'], function( index, element )
+      {
+        var row = "<tr>";
+        row += "<td><span class='label label-" + element.details.state_label + "'>" + element.details.state + "</span></td>";
+        row += "<td>" + element.entity.label + "</td>";
+        row += "<td>" + element.check.label + "</td>";
+        row += "<td>" + element.alarm.label + "</td>";
+        row += "<td>" + element.details.status + "</td>";
+        row += "<td>" + element.details.timestamp + "</td>";
+        table.push(row)
+      });
+      $( "#events > tbody").replaceWith( table.join("\n") );
+    });
   }, 10000)
 });

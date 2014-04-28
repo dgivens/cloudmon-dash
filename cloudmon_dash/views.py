@@ -5,7 +5,7 @@ from bson.objectid import ObjectId
 from datetime import datetime
 from flask import redirect, render_template, request, url_for
 from cloudmon_dash import app, mongo
-from cloudmon_dash.utils import get_alarms, update_alarm
+from cloudmon_dash.utils import get_alarms, get_events, update_alarm
 from cloudmon_dash.utils import utc_timestamp_to_local
 from pymongo import ASCENDING, DESCENDING
 from sets import Set
@@ -14,7 +14,8 @@ from sets import Set
 @app.route('/')
 def index():
     alarms = get_alarms()
-    return render_template('index.html', alarms=alarms)
+    events = get_events(skip=0, limit=10)
+    return render_template('index.html', alarms=alarms, events=events)
 
 
 @app.route('/hosts')
@@ -97,15 +98,9 @@ def notification():
         'status': event['details']['status'],
         'timestamp': local_dt.strftime('%d %b %Y %H:%M:%S %Z'),
         'acknowledged': False,
-        'cleared': False
+        'cleared': False,
+        'state_label': get_state_label(event['details']['state'])
     }
-
-    if event['details']['state'] == 'OK':
-        alarm_details['state_label'] = 'success'
-    elif event['details']['state'] == 'WARNING':
-        alarm_details['state_label'] = 'warning'
-    else:
-        alarm_details['state_label'] = 'danger'
 
     update_alarm(hostname, check_label, alarm_label, **alarm_details)
     return 'OK'
