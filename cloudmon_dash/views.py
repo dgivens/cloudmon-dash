@@ -61,6 +61,14 @@ def status_all():
     return json.dumps(alarms, default=json_util.default)
 
 
+@app.route('/events')
+def events():
+    skip = request.args.get('skip')
+    limit = request.args.get('limit')
+    events = get_events(skip, limit)
+    return json.dumps(events, default=json_util.default)
+
+
 @app.route('/alarms/<alarm_id>/acknowledge')
 def acknowledge(alarm_id):
     oid = ObjectId(alarm_id)
