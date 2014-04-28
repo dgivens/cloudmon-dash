@@ -1,6 +1,7 @@
 import pytz
-from datetime import datetime
 from cloudmon_dash import app, mongo
+from datetime import datetime
+from pymongo import ASCENDING, DESCENDING
 from pytz import timezone
 
 
@@ -18,8 +19,8 @@ def get_alarms(state=None):
 
 def get_events(skip=0, limit=10):
     events = []
-    cursor = mongo.db.notifications.find().skip(skip).limit(limit)
-    for event in cursor:
+    cursor = mongo.db.notifications.find()
+    for event in cursor.sort('details.timestamp', DESCENDING).skip(skip).limit(limit):
         event_ts = event['details']['timestamp']
         local_tz = app.config['TIME_ZONE']
         local_dt = utc_timestamp_to_local(event_ts, local_tz)
