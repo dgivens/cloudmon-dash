@@ -5,8 +5,8 @@ from bson.objectid import ObjectId
 from datetime import datetime
 from flask import redirect, render_template, request, url_for
 from cloudmon_dash import app, mongo
-from cloudmon_dash.utils import get_alarms, get_events, update_alarm
-from cloudmon_dash.utils import utc_timestamp_to_local
+from cloudmon_dash.utils import get_alarms, get_events, get_state_label
+from cloudmon_dash.utils import update_alarm, utc_timestamp_to_local
 from pymongo import ASCENDING, DESCENDING
 from sets import Set
 
