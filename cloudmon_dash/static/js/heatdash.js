@@ -60,6 +60,7 @@ $( document ).ready( function()
         row += "<td>" + element.alarm.label + "</td>";
         row += "<td>" + element.details.status + "</td>";
         row += "<td>" + element.details.timestamp + "</td>";
+        row += "</tr>";
         table.push(row)
       });
       $( "#events > tbody").replaceWith( table.join("\n") );
