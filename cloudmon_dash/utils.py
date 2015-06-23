@@ -12,9 +12,7 @@ def get_alarms(state=None):
     else:
         search = {'state': {'$ne': 'OK'}}
 
-    cursor = mongo.db.alarms.find(search)
-
-    for alarm in cursor.sort('timestamp', DESCENDING):
+    for alarm in mongo.db.alarms.find(search).sort('timestamp', DESCENDING):
         alerting.append(alarm)
     return alerting
 
