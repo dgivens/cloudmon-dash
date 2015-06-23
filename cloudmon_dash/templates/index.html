@@ -61,6 +61,7 @@
                 <th>Alarm</th>
                 <th>Status</th>
                 <th>Timestamp</th>
+              </tr>
             </thead>
             <tbody class="table-striped">
             {%- for event in events %}
@@ -77,6 +78,7 @@
           </table>
         </div>
       </div>
+    </div>
 {%- endblock content %}
 {%- block footer %}
     {{ super() }}
