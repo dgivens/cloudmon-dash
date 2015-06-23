@@ -14,7 +14,7 @@ def get_alarms(state=None):
 
     cursor = mongo.db.alarms.find(search)
 
-    for alarm in cursor.sort('details.timestamp', DESCENDING):
+    for alarm in cursor.sort('timestamp', DESCENDING):
         alerting.append(alarm)
     return alerting
 
